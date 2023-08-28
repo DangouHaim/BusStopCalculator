@@ -1,0 +1,15 @@
+obj/
+bin/
+.vs/
+.idea/
+logs/
+files/
+[Ww]eb/
+node_modules/
+*.user
+*.[Pp]ublish.xml
+*.azurePubxml
+*.pubxml
+*.publishproj
+/packages
+/tests
