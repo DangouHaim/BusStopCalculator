@@ -6,7 +6,8 @@ namespace BusStopCalculator.BLL.Services;
 
 public interface IBusStationService
 {
-    
+    Task<IEnumerable<BusStation>> GetAll();
+    Task<BusStation> GetById(long id);
 }
 
 public class BusStationService : IBusStationService
@@ -26,5 +27,15 @@ public class BusStationService : IBusStationService
         var busStations = _busStationRepository.GetAll();
 
         return await _busStationMapper.MapCollectionToDto(busStations).ToListAsync();
+    }
+
+    public async Task<BusStation> GetById(long id)
+    {
+        var busStations = _busStationRepository.GetAll()
+            .Where(x => x.Id == id);
+        
+        var busStation = await busStations.FirstAsync();
+
+        return _busStationMapper.MapToDto(busStation);
     }
 }

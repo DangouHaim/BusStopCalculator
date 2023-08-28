@@ -13,7 +13,8 @@ internal static class DependenciesRegistration
 
         // BLL dependencies
         services.AddSingleton<IBusStationMapper, BusStationMapper>();
-        services.AddSingleton<IBusStationService, BusStationService>();
+        services.AddTransient<IBusStationService, BusStationService>();
+        services.AddTransient<IBusStationCalculationService, BusStationCalculationService>();
 
         // DAL dependencies
         services.AddSingleton<IBusStationRepository, BusStationRepository>();
