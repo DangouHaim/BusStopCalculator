@@ -28,13 +28,13 @@ public class BusStationCalculationService : IBusStationCalculationService
     private double CalculateDistance(double latitudeDelta, double longitudeDelta, double latitudeFromInRadians,
         double latitudeToInRadians)
     {
-        var a = Math.Pow(Math.Sin(latitudeDelta / 2), 2) + Math.Cos(latitudeFromInRadians)
+        var haversine = Math.Pow(Math.Sin(latitudeDelta / 2), 2) + Math.Cos(latitudeFromInRadians)
             * Math.Cos(latitudeToInRadians) * Math.Pow(Math.Sin(longitudeDelta / 2), 2);
 
-        var c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
+        var distance = 2 * Math.Atan2(Math.Sqrt(haversine), Math.Sqrt(1 - haversine));
 
-        var d = EarthRadius * c; // Distance in km
+        var distanceInKilometers = EarthRadius * distance; // Distance in km
 
-        return d;
+        return distanceInKilometers;
     }
 }
