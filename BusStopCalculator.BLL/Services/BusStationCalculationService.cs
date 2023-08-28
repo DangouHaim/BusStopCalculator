@@ -19,7 +19,7 @@ public class BusStationCalculationService : IBusStationCalculationService
     {
         var locationDelta = stationTo.Location - stationFrom.Location;
         var latitudeFromInRadians = stationFrom.Location.Latitude * PiOverHundred;
-        var latitudeToInRadians = stationTo.Location.Longitude * PiOverHundred;
+        var latitudeToInRadians = stationTo.Location.Latitude * PiOverHundred;
 
         return CalculateDistance(locationDelta.Latitude, locationDelta.Longitude, latitudeFromInRadians,
             latitudeToInRadians);
@@ -28,6 +28,7 @@ public class BusStationCalculationService : IBusStationCalculationService
     private double CalculateDistance(double latitudeDelta, double longitudeDelta, double latitudeFromInRadians,
         double latitudeToInRadians)
     {
+        // The formula is equivalent to calculation below - h = sin²(Δlat/2) + cos(lat1) * cos(lat2) * sin²(Δlon/2)
         var haversine = Math.Pow(Math.Sin(latitudeDelta / 2), 2) + Math.Cos(latitudeFromInRadians)
             * Math.Cos(latitudeToInRadians) * Math.Pow(Math.Sin(longitudeDelta / 2), 2);
 
